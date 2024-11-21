@@ -15,7 +15,7 @@
           class="mb-2"
         >
           <AccordionHeader
-            class="flex items-start p-2 text-sm text-black font-semibold !bg-neutral-300 rounded"
+            class="flex items-start p-2 text-sm !text-black font-semibold !bg-neutral-300 rounded"
           >
             <div class="flex items-center gap-1">
               <Icon :icon="getIcon(tab.title)" />
