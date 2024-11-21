@@ -33,7 +33,9 @@
         <InputText
           class="w-[14rem] md:w-[22rem]"
           type="text"
-          placeholder="Search by Tariffs, Pickup and  Destination"
+          placeholder="Search by Tariffs, Pickup and Destination"
+          v-model="searchByLocation"
+          @input="emitSearch"
         />
       </IconField>
       <IconField>
@@ -42,6 +44,8 @@
           class="w-[14rem]"
           type="text"
           placeholder="Search by Company"
+          v-model="searchByCompany"
+          @input="emitSearch"
         />
       </IconField>
       <ButtonGroup>
@@ -58,7 +62,20 @@ import ButtonGroup from "~/components/base/ButtonGroup.vue";
 const heading = "Tarrifs";
 const results = 20;
 const items = ref([{ label: "Pricing" }, { label: "Tarrif" }]);
+
+const searchByLocation = ref("");
+const searchByCompany = ref("");
+
+// Emitting the searched queries to the Management Table
+const emit = defineEmits(["search"]);
+const emitSearch = () => {
+  emit("search", {
+    searchByLocation: searchByLocation.value,
+    searchByCompany: searchByCompany.value,
+  });
+};
 </script>
+
 <style scoped>
 .p-breadcrumb,
 h1,
