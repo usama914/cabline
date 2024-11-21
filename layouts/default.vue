@@ -16,6 +16,6 @@ import SidebarItems from "~/components/layout/SidebarItems.vue";
 <style>
 body {
   font-family: "Roboto", sans-serif;
-  min-width: 710px;
+  /* min-width: 710px; */
 }
 </style>
