@@ -38,7 +38,6 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
 const route = useRoute();
 const links = [
   { name: "Dispatch", path: "/dispatch" },
