@@ -15,7 +15,7 @@
           class="mb-2"
         >
           <AccordionHeader
-            class="flex items-start !p-2 text-sm !text-black font-semibold !bg-neutral-300 !rounded-none"
+            class="flex items-start p-2 text-sm text-black font-semibold !bg-neutral-300 rounded"
           >
             <div class="flex items-center gap-1">
               <Icon :icon="getIcon(tab.title)" />
@@ -29,13 +29,19 @@
             <div
               v-for="link in tab.links"
               :key="link.name"
-              class="!p-3 !pl-[1.8rem] !bg-neutral-300"
+              class="p-3 pl-7 bg-neutral-300 "
             >
               <NuxtLink
                 :to="link.route"
-                class="text-black-600 font-bold hover:text-blue-800 w-100"
+                class="block font-bold w-full py-1 px-1 rounded hover:bg-black"
+                :class="{
+                  'text-white bg-black': route.path === link.route,
+                  'text-gray-600 hover:text-white': route.path !== link.route,
+                }"
               >
-                {{ link.name }}
+                <span>
+                  {{ link.name }}
+                </span>
               </NuxtLink>
             </div>
           </AccordionContent>
@@ -47,6 +53,8 @@
 
 <script setup>
 import { ref } from "vue";
+const route = useRoute();
+
 const title = "Management";
 const tabs = ref([
   {
@@ -87,9 +95,3 @@ const getIcon = (title) => {
   }
 };
 </script>
-
-<style scoped>
-h1 {
-  font-family: "Mitr", sans-serif;
-}
-</style>
