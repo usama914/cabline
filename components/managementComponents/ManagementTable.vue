@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <DataTable :value="products" tableStyle="min-width: 50rem">
+    <DataTable :value="products" >
       <Column field="id" header="ID"></Column>
       <Column field="name" header="Name"></Column>
       <Column field="code" header="Code"></Column>
@@ -14,8 +14,6 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-import DataTable from "primevue/datatable";
-import Column from "primevue/column";
 import { ProductService } from "@/service/ProductService";
 
 onMounted(() => {
@@ -25,8 +23,4 @@ onMounted(() => {
 const products = ref();
 </script>
 
-<style scoped>
-.open-sans {
-  font-family: "Open Sans", sans-serif;
-}
-</style>
+<style scoped></style>

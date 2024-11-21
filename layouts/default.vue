@@ -2,23 +2,20 @@
   <div class="flex flex-col min-h-screen">
     <HeaderComponent />
     <main class="flex flex-grow">
-      <SidebarItems></SidebarItems>
+      <SidebarItems />
       <slot />
     </main>
   </div>
 </template>
 
-<script setup lang="ts">
-import HeaderComponent from "~/components/HeaderComponent.vue";
-import SidebarItems from "~/components/SidebarItems.vue";
+<script setup>
+import HeaderComponent from "~/components/layout/HeaderComponent.vue";
+import SidebarItems from "~/components/layout/SidebarItems.vue";
 </script>
 
 <style>
 body {
   font-family: "Roboto", sans-serif;
-}
-
-.open-sans {
-  font-family: "Open Sans", sans-serif;
+  min-width: 710px;
 }
 </style>

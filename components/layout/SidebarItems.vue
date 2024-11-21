@@ -48,7 +48,6 @@
 <script setup>
 import { ref } from "vue";
 const title = "Management";
-// Define the tabs with their titles and links
 const tabs = ref([
   {
     title: "Fleet",
@@ -91,7 +90,6 @@ const getIcon = (title) => {
 
 <style scoped>
 h1 {
-  /* letter-spacing: 0.1rem; */
   font-family: "Mitr", sans-serif;
 }
 </style>

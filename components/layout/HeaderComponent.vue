@@ -1,7 +1,6 @@
 <template>
-  <header class="bg-black text-white px-4 pb-2">
+  <header class="bg-black text-white px-4 pb-2 w-full">
     <div class="flex justify-between items-center">
-      <!-- Ensure NuxtImg is working in your project -->
       <NuxtImg
         src="/images/Logo.png"
         class="w-[10rem] pt-2"
@@ -44,7 +43,7 @@ const route = useRoute();
 const links = [
   { name: "Dispatch", path: "/dispatch" },
   { name: "Bookings", path: "/bookings" },
-  { name: "Management", path: "/managementPage" },
+  { name: "Management", path: "/management" },
   { name: "Accounts", path: "/accounts" },
   { name: "Stats", path: "/stats" },
   { name: "User", path: "/user" },

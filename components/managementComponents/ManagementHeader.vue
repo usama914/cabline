@@ -4,7 +4,10 @@
   >
     <div class="tarrifs flex flex-col justify-start items-start space-y-2">
       <div class="card flex justify-center">
-        <Breadcrumb class="text-base !p-0" :model="items">
+        <Breadcrumb
+          class="text-xs !p-0 uppercase tracking-widest"
+          :model="items"
+        >
           <template #item="{ item }">
             <span>{{ item.label }} </span>
           </template>
@@ -14,12 +17,14 @@
         </Breadcrumb>
       </div>
       <div class="heading">
-        <h1 class="text-xl">
+        <h1 class="text-xl uppercase tracking-widest">
           {{ heading }}
         </h1>
       </div>
       <div class="results">
-        <p class="text-xs">{{ results }} Results Found</p>
+        <p class="text-xs uppercase tracking-widest">
+          {{ results }} Results Found
+        </p>
       </div>
     </div>
     <div class="actions flex gap-3 flex-wrap">
@@ -55,14 +60,9 @@ const results = 20;
 const items = ref([{ label: "Pricing" }, { label: "Tarrif" }]);
 </script>
 <style scoped>
-.p-breadcrumb {
-  font-size: 10px;
-}
 .p-breadcrumb,
 h1,
 p {
-  text-transform: uppercase;
-  letter-spacing: 0.1rem;
   font-family: "Mitr", sans-serif;
 }
 </style>
