@@ -1,3 +1,5 @@
+<!-- Here in the sidebar all the content ( Heading , Links etc) will be changed based on the route we are at -- Functionality and Component postion Pending -->
+
 <template>
   <div
     class="h-100 w-60 flex-col items-center pt-5 hidden lg:flex"
@@ -29,7 +31,7 @@
             <div
               v-for="link in tab.links"
               :key="link.name"
-              class="p-3 pl-7 bg-neutral-300 "
+              class="p-3 pl-7 bg-neutral-300"
             >
               <NuxtLink
                 :to="link.route"
