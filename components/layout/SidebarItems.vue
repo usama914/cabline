@@ -37,13 +37,13 @@
             >
               <NuxtLink
                 :to="link.route"
-                class="block text-black w-full py-1 px-1 rounded hover:bg-black"
+                class="block w-full rounded hover:bg-black"
                 :class="{
                   'text-white bg-black': route.path === link.route,
                   'text-gray-600 hover:text-white': route.path !== link.route,
                 }"
               >
-                <span>
+                <span class="block w-full text-black hover:text-white p-1">
                   {{ link.name }}
                 </span>
               </NuxtLink>
