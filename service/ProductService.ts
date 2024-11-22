@@ -1,5 +1,29 @@
+interface Order {
+    id: string;
+    productCode: string;
+    date: string;
+    amount: number;
+    quantity: number;
+    customer: string;
+    status: 'DELIVERED' | 'CANCELLED' | 'RETURNED' | 'PENDING';
+  }
+
+  interface Product {
+    id: string;
+    code: string;
+    name: string;
+    description: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+    inventoryStatus: 'OUTOFSTOCK' | 'LOWSTOCK' | 'INSTOCK';
+    rating: number;
+    orders: Order[];
+  }
+
 export const ProductService = {
-    getProductsData() {
+    getProductsData(): Product[] {
         return [
             {
                 id: '1000',
@@ -12,7 +36,7 @@ export const ProductService = {
                 quantity: 24,
                 inventoryStatus: 'INSTOCK',
                 rating: 5
-            },
+              },
             {
                 id: '1001',
                 code: 'nvklal433',
@@ -364,7 +388,7 @@ export const ProductService = {
         ];
     },
 
-    getProductsWithOrdersData() {
+    getProductsWithOrdersData(): Product[] {
         return [
             {
                 id: '1000',
@@ -1198,23 +1222,25 @@ export const ProductService = {
         ];
     },
 
-    getProductsMini() {
-        return Promise.resolve(this.getProductsData().slice(0, 5));
-    },
+  // Methods to get smaller slices of product data
+  getProductsMini(): Promise<Product[]> {
+    return Promise.resolve(this.getProductsData().slice(0, 5));
+  },
 
-    getProductsSmall() {
-        return Promise.resolve(this.getProductsData().slice(0, 10));
-    },
+  getProductsSmall(): Promise<Product[]> {
+    return Promise.resolve(this.getProductsData().slice(0, 10));
+  },
 
-    getProducts() {
-        return Promise.resolve(this.getProductsData());
-    },
+  getProducts(): Promise<Product[]> {
+    return Promise.resolve(this.getProductsData());
+  },
 
-    getProductsWithOrdersSmall() {
-        return Promise.resolve(this.getProductsWithOrdersData().slice(0, 10));
-    },
+  getProductsWithOrdersSmall(): Promise<Product[]> {
+    return Promise.resolve(this.getProductsWithOrdersData().slice(0, 10));
+  },
 
-    getProductsWithOrders() {
-        return Promise.resolve(this.getProductsWithOrdersData());
-    }
+  getProductsWithOrders(): Promise<Product[]> {
+    return Promise.resolve(this.getProductsWithOrdersData());
+  }
+
 };

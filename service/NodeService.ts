@@ -1,5 +1,13 @@
+interface TreeNode {
+  key: string;
+  label: string;
+  data: string;
+  icon: string;
+  children?: TreeNode[]; // children is optional because a node may not have any children
+}
+
 export const NodeService = {
-  treeNodes() {
+  treeNodes(): TreeNode[] {
     return [
       {
         key: "0",
@@ -45,7 +53,8 @@ export const NodeService = {
       },
     ];
   },
-  getTreeNodes() {
-      return Promise.resolve(this.treeNodes().slice(0, 5));
+
+  getTreeNodes(): Promise<TreeNode[]> {
+    return Promise.resolve(this.treeNodes().slice(0, 5));
   },
 };

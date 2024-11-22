@@ -15,7 +15,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
-import { ProductService } from "@/service/ProductService";
+import { ProductService } from "~/service/ProductService";
 import ManagementHeader from "~/components/managementComponents/ManagementHeader.vue";
 
 // Definning types for product and search query
