@@ -42,13 +42,13 @@
 
     <!-- Mobile Menu -->
     <div
-      class="absolute top-0 left-0 w-full h-full bg-black text-white z-50 transform transition-transform duration-300"
+      class="absolute top-0 left-0 w-full bg-black h-full text-white z-50 transform transition-transform duration-300"
       :class="{
         'translate-x-0': isMobileMenuOpen,
         '-translate-x-full': !isMobileMenuOpen,
       }"
     >
-      <div class="flex justify-between items-center px-4 pt-4 pb-[.5rem]">
+      <div class="flex justify-between items-center px-4 h-[3rem] bg-black">
         <NuxtImg src="/images/Logo.png" class="w-[8rem]" alt="Cabline Logo" />
         <Icon
           icon="material-symbols:close"
@@ -78,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useRoute } from "vue-router";
 
 interface Link {
@@ -98,10 +98,41 @@ const links: Link[] = [
 
 // Mobile menu toggle
 const isMobileMenuOpen = ref(false);
+const screenWidth = ref(0);
+
 const toggleMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
+
 const closeMenu = () => {
   isMobileMenuOpen.value = false;
 };
+
+// Update screen width on resize (client-side only)
+const updateScreenWidth = () => {
+  if (process.client) {
+    screenWidth.value = window.innerWidth;
+  }
+};
+
+// Watching for screen size changes
+watch(screenWidth, (newWidth) => {
+  if (newWidth >= 768) {
+    isMobileMenuOpen.value = false; // Closing the menu when screen size is md or larger
+  }
+});
+
+// Setting up event listeners for window resize
+onMounted(() => {
+  if (process.client) {
+    screenWidth.value = window.innerWidth;
+    window.addEventListener("resize", updateScreenWidth);
+  }
+});
+
+onUnmounted(() => {
+  if (process.client) {
+    window.removeEventListener("resize", updateScreenWidth);
+  }
+});
 </script>
