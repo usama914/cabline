@@ -5,7 +5,7 @@
       label="new"
       severity="help"
       icon="pi pi-check"
-      class="px-5 mr-3"
+      class="px-5"
     >
       <slot name="primary">Primary Button</slot></Button
     >

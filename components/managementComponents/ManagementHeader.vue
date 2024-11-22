@@ -1,6 +1,6 @@
 <template>
   <header
-    class="bg-white text-black flex flex-col items-start gap-8 px-4 py-2 mb-2 xl:flex-row xl:justify-between xl:items-center"
+    class="bg-white text-black flex flex-col items-start gap-8 py-2 mb-2 xl:flex-row xl:justify-between xl:items-center"
   >
     <div class="tarrifs flex flex-col justify-start items-start space-y-2">
       <div class="card flex justify-center">

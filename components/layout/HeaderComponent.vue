@@ -1,9 +1,9 @@
 <template>
-  <header class="bg-black text-white px-4 pb-2 w-full relative">
+  <header class="bg-black text-white px-4 w-full relative">
     <div class="flex justify-between items-center">
       <NuxtImg
         src="/images/Logo.png"
-        class="w-[10rem] pt-2"
+        class="w-[7.5rem] pt-2"
         alt="Cabline Logo"
       />
       <!-- Desktop Menu -->
@@ -20,11 +20,11 @@
               "
             >
               <template v-if="link.path === '/profile'">
-                <Icon icon="raphael:user" />
+                <Icon icon="raphael:user" class="h-[12px]" />
               </template>
               <span>{{ link.name }}</span>
               <template v-if="link.path === '/profile'">
-                <Icon icon="mdi:arrow-down-drop" />
+                <Icon icon="mdi:arrow-down-drop" class="h-[12px]" />
               </template>
             </NuxtLink>
           </li>

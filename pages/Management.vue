@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto px-4 mt-10 w-100 lg:w-4/5 overflow-auto">
+  <div class="mx-auto px-4 mt-10 w-full overflow-auto">
     <ManagementTable />
   </div>
 </template>

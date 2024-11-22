@@ -11,7 +11,7 @@
           {{ title }}
         </h1>
       </div>
-      <Accordion value="0" class="border-none">
+      <Accordion :value="['0']" class="border-none" multiple>
         <AccordionPanel
           v-for="tab in tabs"
           :key="tab.title"
