@@ -55,20 +55,22 @@
   </header>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
 import ButtonGroup from "~/components/base/ButtonGroup.vue";
+import { ref } from "vue";
 
-const heading = "Tarrifs";
-const results = 20;
-const items = ref([{ label: "Pricing" }, { label: "Tarrif" }]);
+// Defining the variables with their types
+const heading: string = "Tariffs";
+const results: number = 20;
+const items = ref<{ label: string }[]>([{ label: "Pricing" }, { label: "Tariff" }]);
 
-const searchByLocation = ref("");
-const searchByCompany = ref("");
+const searchByLocation = ref<string>("");
+const searchByCompany = ref<string>("");
 
-// Emitting the searched queries to the Management Table
+// Defining the emit function to handle the search event
 const emit = defineEmits(["search"]);
-const emitSearch = () => {
+
+const emitSearch = (): void => {
   emit("search", {
     searchByLocation: searchByLocation.value,
     searchByCompany: searchByCompany.value,
@@ -77,4 +79,5 @@ const emitSearch = () => {
 </script>
 
 <style scoped>
+/* Add any scoped styles if necessary */
 </style>

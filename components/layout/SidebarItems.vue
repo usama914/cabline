@@ -7,9 +7,7 @@
   >
     <div class="w-48">
       <div class="title mb-4">
-        <h1
-          class="font-mitr text-base uppercase tracking-widest"
-        >
+        <h1 class="font-mitr text-base uppercase tracking-widest">
           {{ title }}
         </h1>
       </div>
@@ -57,12 +55,23 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
+interface Link {
+  name: string;
+  route: string;
+}
+
+interface Tab {
+  title: string;
+  value: string;
+  links: Link[];
+}
+
 const route = useRoute();
 
-const title = "Management";
-const tabs = ref([
+const title: string = "Management";
+const tabs = ref<Tab[]>([
   {
     title: "Fleet",
     value: "0",
@@ -88,8 +97,8 @@ const tabs = ref([
   },
 ]);
 
-const getIcon = (title) => {
-  switch (title) {
+const getIcon = (tabTitle: string): string => {
+  switch (tabTitle) {
     case "Fleet":
       return "tabler:steering-wheel-filled";
     case "Pricing":

@@ -13,37 +13,62 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed, onMounted } from "vue";
 import { ProductService } from "@/service/ProductService";
 import ManagementHeader from "~/components/managementComponents/ManagementHeader.vue";
 
-const products = ref([]);
-const searchQuery = ref({
+// Definning types for product and search query
+interface Product {
+  id: number;
+  name: string;
+  code: string;
+  description: string;
+  category: string;
+  quantity: number;
+  rating: number;
+}
+
+interface SearchQuery {
+  searchByLocation: string;
+  searchByCompany: string;
+}
+
+// Reactive references
+const products = ref<Product[]>([]);
+const searchQuery = ref<SearchQuery>({
   searchByLocation: "",
   searchByCompany: "",
 });
 
-// Getting the products data from service folder
+// Getting the products data from the service
 onMounted(() => {
   ProductService.getProductsMini().then((data) => (products.value = data));
 });
 
-// Updating search query
-const handleSearch = (query) => {
+// Defining emits and their types
+const emit = defineEmits<{
+  (e: "search", query: SearchQuery): void;
+}>();
+
+// Updating search query received from ManagementHeader component
+const handleSearch = (query: SearchQuery): void => {
   searchQuery.value = query;
+  emit("search", query); // Emit the updated search query to parent component (if necessary)
 };
 
-// Filtering the products based on search query
+// Filter the products based on the search query
 const filteredProducts = computed(() => {
   return products.value.filter((product) => {
     const locationMatch = product.name
-      ?.toLowerCase()
+      .toLowerCase()
       .includes(searchQuery.value.searchByLocation.toLowerCase());
     const companyMatch = product.category
-      ?.toLowerCase()
+      .toLowerCase()
       .includes(searchQuery.value.searchByCompany.toLowerCase());
     return locationMatch && companyMatch;
   });
 });
 </script>
+
+<style scoped></style>

@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto px-4 py-10 w-3/6">
     <h1 class="text-4xl mb-6 text-center open-sans">
-      Welcome to Nuxt Skeleton
+      Welcome to Cabline
     </h1>
 
     <div class="flex flex-col items-center mb-8">
