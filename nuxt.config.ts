@@ -29,6 +29,7 @@ export default defineNuxtConfig({
         wght: [300, 400, 600, 700],
         ital: [300, 400, 600, 700],
       },
+        Mitr: true,
     },
     display: 'swap',
     preload: true,

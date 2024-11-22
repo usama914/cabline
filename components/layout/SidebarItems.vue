@@ -7,7 +7,11 @@
   >
     <div class="w-48">
       <div class="title mb-4">
-        <h1 class="text-base uppercase tracking-widest">{{ title }}</h1>
+        <h1
+          class="font-mitr text-base uppercase tracking-widest"
+        >
+          {{ title }}
+        </h1>
       </div>
       <Accordion value="0" class="border-none">
         <AccordionPanel
@@ -35,7 +39,7 @@
             >
               <NuxtLink
                 :to="link.route"
-                class="block font-bold w-full py-1 px-1 rounded hover:bg-black"
+                class="block text-black w-full py-1 px-1 rounded hover:bg-black"
                 :class="{
                   'text-white bg-black': route.path === link.route,
                   'text-gray-600 hover:text-white': route.path !== link.route,

@@ -11,7 +11,7 @@
           <li
             v-for="link in links"
             :key="link.path"
-            class="relative hidden md:block"
+            class="relative hidden md:block h-12"
           >
             <NuxtLink
               :to="link.path"

@@ -5,7 +5,7 @@
     <div class="tarrifs flex flex-col justify-start items-start space-y-2">
       <div class="card flex justify-center">
         <Breadcrumb
-          class="text-xs !p-0 uppercase tracking-widest"
+          class="font-mitr text-xs !p-0 uppercase tracking-widest"
           :model="items"
         >
           <template #item="{ item }">
@@ -17,12 +17,12 @@
         </Breadcrumb>
       </div>
       <div class="heading">
-        <h1 class="text-xl uppercase tracking-widest">
+        <h1 class="font-mitr text-xl uppercase tracking-widest">
           {{ heading }}
         </h1>
       </div>
       <div class="results">
-        <p class="text-xs uppercase tracking-widest">
+        <p class="font-mitr text-xs uppercase tracking-widest">
           {{ results }} Results Found
         </p>
       </div>
@@ -77,9 +77,4 @@ const emitSearch = () => {
 </script>
 
 <style scoped>
-.p-breadcrumb,
-h1,
-p {
-  font-family: "Mitr", sans-serif;
-}
 </style>
