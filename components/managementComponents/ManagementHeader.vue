@@ -8,12 +8,6 @@
           class="font-mitr text-xs !p-0 uppercase tracking-widest"
           :model="items"
         >
-          <template #item="{ item }">
-            <span>{{ item.label }} </span>
-          </template>
-          <template #separator>
-            <Icon icon="material-symbols:play-arrow" class="w-5 h-5" />
-          </template>
         </Breadcrumb>
       </div>
       <div class="heading">
@@ -48,26 +42,34 @@
           @input="emitSearch"
         />
       </IconField>
-      <ButtonGroup>
+      <ButtonGroup @click="showModal = true">
         <template #primary> New <Icon icon="prime:check" /></template>
       </ButtonGroup>
+      <Model v-model:visible="showModal" header="Add New">
+        <p class="text-center">
+          This is **custom content**, passed from
+          <b>management.vue</b>.
+        </p>
+      </Model>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
 import ButtonGroup from "~/components/base/ButtonGroup.vue";
+import Model from "~/components/base/Model.vue";
 import { ref } from "vue";
 
-// Defining the variables with their types
 const heading: string = "Tariffs";
 const results: number = 20;
-const items = ref<{ label: string }[]>([{ label: "Pricing" }, { label: "Tariff" }]);
+const items = ref<{ label: string }[]>([
+  { label: "Pricing" },
+  { label: "Tariff" },
+]);
 
 const searchByLocation = ref<string>("");
 const searchByCompany = ref<string>("");
 
-// Defining the emit function to handle the search event
 const emit = defineEmits(["search"]);
 
 const emitSearch = (): void => {
@@ -76,8 +78,12 @@ const emitSearch = (): void => {
     searchByCompany: searchByCompany.value,
   });
 };
+
+const showModal = ref(false);
 </script>
 
 <style scoped>
-/* Add any scoped styles if necessary */
+.p-inputtext:enabled:focus {
+  border-color: var(--color-primary) !important;
+}
 </style>

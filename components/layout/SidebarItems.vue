@@ -1,8 +1,6 @@
-<!-- Here in the sidebar all the content ( Heading , Links etc) will be changed based on the route we are at -- Functionality and Component postion Pending -->
-
 <template>
   <div
-    class="h-100 w-60 flex-col items-center pt-5 hidden lg:flex"
+    class="h-100 w-60 flex-col items-center p-4 hidden lg:flex"
     :style="{ backgroundColor: 'var(--color-neutral-semilight)' }"
   >
     <div class="w-48">
@@ -11,102 +9,101 @@
           {{ title }}
         </h1>
       </div>
-      <Accordion :value="['0']" class="border-none" multiple>
-        <AccordionPanel
-          v-for="tab in tabs"
-          :key="tab.title"
-          :value="tab.value"
-          class="mb-2"
+      <div class="card flex justify-center">
+        <PanelMenu
+          :model="items"
+          class="w-full md:w-80"
+          style="
+            --p-panelmenu-panel-background: var(--color-neutral-light) !important;
+          "
         >
-          <AccordionHeader
-            class="flex items-start p-2 text-sm !text-black font-semibold !bg-neutral-300 rounded"
-          >
-            <div class="flex items-center gap-1">
-              <Icon :icon="getIcon(tab.title)" />
-              {{ tab.title }}
-            </div>
-          </AccordionHeader>
-          <AccordionContent
-            class="text-sm text-gray-600"
-            style="--p-accordion-content-padding: 0px !important"
-          >
-            <div
-              v-for="link in tab.links"
-              :key="link.name"
-              class="p-3 pl-7 bg-neutral-300"
+          <template #item="{ item }">
+            <NuxtLink
+              :to="item.route"
+              class="flex items-center cursor-pointer text-surface-700 dark:text-surface-0 px-4 py-2"
             >
-              <NuxtLink
-                :to="link.route"
-                class="block w-full rounded hover:bg-black"
-                :class="{
-                  'text-white bg-black': route.path === link.route,
-                  'text-gray-600 hover:text-white': route.path !== link.route,
-                }"
-              >
-                <span class="block w-full text-black hover:text-white p-1">
-                  {{ link.name }}
-                </span>
-              </NuxtLink>
-            </div>
-          </AccordionContent>
-        </AccordionPanel>
-      </Accordion>
+              <Icon :icon="item.icon" class="text-lg" />
+              <span class="ml-2">{{ item.label }}</span>
+              <Icon
+                v-if="item.items"
+                class="ml-auto"
+                icon="mdi:arrow-down-drop"
+              />
+            </NuxtLink>
+          </template>
+        </PanelMenu>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-interface Link {
-  name: string;
-  route: string;
+import { Icon } from "@iconify/vue";
+
+interface MenuItem {
+  label: string;
+  icon?: string;
+  route?: string;
+  url?: string;
+  target?: "_blank" | "_self";
+  items?: MenuItem[];
 }
 
-interface Tab {
-  title: string;
-  value: string;
-  links: Link[];
-}
-
-const route = useRoute();
-
-const title: string = "Management";
-const tabs = ref<Tab[]>([
+const title = ref<string>("Management");
+const items = ref<MenuItem[]>([
   {
-    title: "Fleet",
-    value: "0",
-    links: [
-      { name: "Drivers", route: "/drivers" },
-      { name: "Vehicles", route: "/vehicles" },
-      { name: "Capabilities", route: "/capabilities" },
+    label: "Fleet",
+    icon: "tabler:steering-wheel-filled",
+    items: [
+      {
+        label: "Drivers",
+        icon: "pi pi-eraser",
+        route: "/management/fleet/drivers",
+      },
+      {
+        label: "Vehicles",
+        icon: "pi pi-heart",
+        route: "/management/fleet/vehicles",
+      },
+      {
+        label: "Capabilities",
+        icon: "pi pi-heart",
+        route: "/management/fleet/capabilities",
+      },
     ],
   },
   {
-    title: "Pricing",
-    value: "1",
-    links: [
-      { name: "Tariffs", route: "/tariffs" },
-      { name: "Vehicles", route: "/vehicles" },
-      { name: "Capabilities", route: "/capabilities" },
+    label: "Pricing",
+    icon: "majesticons:pound-circle-line",
+    items: [
+      {
+        label: "Tarrifs",
+        icon: "pi pi-star",
+        route: "/management/pricing/tarrifs",
+      },
+      {
+        label: "Vehicles",
+        icon: "pi pi-bookmark",
+        route: "/management/pricing/vehicles",
+      },
+      {
+        label: "Capabilities",
+        icon: "pi pi-bookmark",
+        route: "/management/pricing/capabilities",
+      },
     ],
   },
   {
-    title: "Settings",
-    value: "2",
-    links: [{ name: "Settings", route: "/settings" }],
+    label: "Settings",
+    icon: "weui:setting-filled",
+    items: [
+      {
+        label: "Accounts",
+        icon: "pi pi-star",
+        route: "/management/settings/manageAccounts",
+      },
+    ],
   },
 ]);
-
-const getIcon = (tabTitle: string): string => {
-  switch (tabTitle) {
-    case "Fleet":
-      return "tabler:steering-wheel-filled";
-    case "Pricing":
-      return "majesticons:pound-circle-line";
-    case "Settings":
-      return "weui:setting-filled";
-    default:
-      return "";
-  }
-};
 </script>

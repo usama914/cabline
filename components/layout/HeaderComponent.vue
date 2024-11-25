@@ -10,23 +10,27 @@
       <nav class="hidden md:block">
         <ul class="flex items-baseline space-x-4 h-100">
           <li v-for="link in links" :key="link.path" class="relative h-12">
-            <NuxtLink
-              :to="link.path"
-              class="hover:text-gray-300 transition-colors duration-200 flex items-center space-x-2 pt-3"
-              :style="
-                route.path === link.path
-                  ? 'border-top: 3px solid transparent; border-image: linear-gradient(90deg, #BB5DE9 0%, #30D5E8 100%); border-image-slice: 1;'
-                  : ''
-              "
-            >
-              <template v-if="link.path === '/profile'">
+            <template v-if="link.path === '/profile'">
+              <div
+                class="hover:text-gray-300 transition-colors duration-200 flex items-center space-x-2 pt-3 cursor-pointer"
+                @click="toggle"
+                aria-haspopup="true"
+                aria-controls="profile_menu"
+              >
                 <Icon icon="raphael:user" class="h-[12px]" />
-              </template>
-              <span>{{ link.name }}</span>
-              <template v-if="link.path === '/profile'">
+                <span>{{ link.name }}</span>
                 <Icon icon="mdi:arrow-down-drop" class="h-[12px]" />
-              </template>
-            </NuxtLink>
+              </div>
+            </template>
+            <template v-else>
+              <NuxtLink
+                :to="link.path"
+                class="hover:text-gray-300 transition-colors duration-200 flex items-center space-x-2 pt-3"
+                :style="route.path === link.path ? activeStyle : ''"
+              >
+                <span>{{ link.name }}</span>
+              </NuxtLink>
+            </template>
           </li>
         </ul>
       </nav>
@@ -39,6 +43,18 @@
         />
       </div>
     </div>
+
+    <!-- Pop-up Menu -->
+    <Menu ref="menu" id="profile_menu" :model="menuItems" :popup="true">
+      <template #item="{ item }">
+        <NuxtLink :to="item.route">
+          <div class="flex items-center justify-start mb-2 cursor-pointer p-2">
+            <Icon :icon="item.icon" />
+            <span class="ml-2">{{ item.label }}</span>
+          </div>
+        </NuxtLink>
+      </template>
+    </Menu>
 
     <!-- Mobile Menu -->
     <div
@@ -63,11 +79,7 @@
             :to="link.path"
             class="block text-lg hover:bg-gray-700 px-3 py-2 rounded transition w-full"
             @click="closeMenu"
-            :style="
-              route.path === link.path
-                ? 'border-top: 3px solid transparent; border-image: linear-gradient(90deg, #BB5DE9 0%, #30D5E8 100%); border-image-slice: 1;'
-                : ''
-            "
+            :style="route.path === link.path ? activeStyle : ''"
           >
             <span>{{ link.name }}</span>
           </NuxtLink>
@@ -76,7 +88,6 @@
     </div>
   </header>
 </template>
-
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from "vue";
 import { useRoute } from "vue-router";
@@ -87,8 +98,10 @@ interface Link {
 }
 
 const route = useRoute();
+const activeStyle =
+  "border-top: 3px solid transparent; border-image: linear-gradient(90deg, #BB5DE9 0%, #30D5E8 100%); border-image-slice: 1;";
 const links: Link[] = [
-  { name: "Dispatch", path: "/" },
+  { name: "Dispatch", path: "/dispatch" },
   { name: "Bookings", path: "/bookings" },
   { name: "Management", path: "/management" },
   { name: "Accounts", path: "/accounts" },
@@ -108,7 +121,7 @@ const closeMenu = () => {
   isMobileMenuOpen.value = false;
 };
 
-// Update screen width on resize (client-side only)
+// Update screen width on resize
 const updateScreenWidth = () => {
   if (process.client) {
     screenWidth.value = window.innerWidth;
@@ -118,11 +131,10 @@ const updateScreenWidth = () => {
 // Watching for screen size changes
 watch(screenWidth, (newWidth) => {
   if (newWidth >= 768) {
-    isMobileMenuOpen.value = false; // Closing the menu when screen size is md or larger
+    isMobileMenuOpen.value = false; // Close menu for desktop
   }
 });
 
-// Setting up event listeners for window resize
 onMounted(() => {
   if (process.client) {
     screenWidth.value = window.innerWidth;
@@ -135,4 +147,19 @@ onUnmounted(() => {
     window.removeEventListener("resize", updateScreenWidth);
   }
 });
+
+// Pop-up menu toggle
+const menu = ref();
+const menuItems = ref([
+  {
+    label: "My Profile",
+    icon: "raphael:user",
+    route: "/management/settings/manageAccounts",
+  },
+  { label: "Logout", icon: "material-symbols:logout", route: "/" },
+]);
+
+const toggle = (event) => {
+  menu.value.toggle(event);
+};
 </script>
