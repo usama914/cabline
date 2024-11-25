@@ -159,7 +159,7 @@ const menuItems = ref([
   { label: "Logout", icon: "material-symbols:logout", route: "/" },
 ]);
 
-const toggle = (event) => {
+const toggle = (event: MouseEvent) => {
   menu.value.toggle(event);
 };
 </script>
