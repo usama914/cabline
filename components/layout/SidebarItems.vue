@@ -11,10 +11,13 @@
       </div>
       <div class="card flex justify-center">
         <PanelMenu
+          multiple
           :model="items"
-          class="w-full md:w-80"
+          class="w-full md:w-80 !text-red"
           style="
-            --p-panelmenu-panel-background: var(--color-neutral-light) !important;
+            --p-panelmenu-panel-background: var(
+              --color-neutral-semilight
+            ) !important;
           "
         >
           <template #item="{ item }">
@@ -44,8 +47,6 @@ interface MenuItem {
   label: string;
   icon?: string;
   route?: string;
-  url?: string;
-  target?: "_blank" | "_self";
   items?: MenuItem[];
 }
 
@@ -57,18 +58,15 @@ const items = ref<MenuItem[]>([
     items: [
       {
         label: "Drivers",
-        icon: "pi pi-eraser",
-        route: "/management/fleet/drivers",
+        route: "/managements/fleet/drivers",
       },
       {
         label: "Vehicles",
-        icon: "pi pi-heart",
-        route: "/management/fleet/vehicles",
+        route: "/managements/fleet/vehicles",
       },
       {
         label: "Capabilities",
-        icon: "pi pi-heart",
-        route: "/management/fleet/capabilities",
+        route: "/managements/fleet/capabilities",
       },
     ],
   },
@@ -78,18 +76,15 @@ const items = ref<MenuItem[]>([
     items: [
       {
         label: "Tarrifs",
-        icon: "pi pi-star",
-        route: "/management/pricing/tarrifs",
+        route: "/managements/pricing/tarrifs",
       },
       {
         label: "Vehicles",
-        icon: "pi pi-bookmark",
-        route: "/management/pricing/vehicles",
+        route: "/managements/pricing/vehicles",
       },
       {
         label: "Capabilities",
-        icon: "pi pi-bookmark",
-        route: "/management/pricing/capabilities",
+        route: "/managements/pricing/capabilities",
       },
     ],
   },
@@ -99,10 +94,15 @@ const items = ref<MenuItem[]>([
     items: [
       {
         label: "Accounts",
-        icon: "pi pi-star",
-        route: "/management/settings/manageAccounts",
+        route: "/managements/settings/manageAccounts",
       },
     ],
   },
 ]);
 </script>
+<style scoped>
+.p-panelmenu-item-content {
+  background: black !important;
+  color: white !important;
+}
+</style>

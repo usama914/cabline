@@ -154,7 +154,7 @@ const menuItems = ref([
   {
     label: "My Profile",
     icon: "raphael:user",
-    route: "/management/settings/manageAccounts",
+    route: "/managements/settings/manageAccounts",
   },
   { label: "Logout", icon: "material-symbols:logout", route: "/" },
 ]);
