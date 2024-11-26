@@ -10,16 +10,7 @@
         </h1>
       </div>
       <div class="card flex justify-center">
-        <PanelMenu
-          multiple
-          :model="items"
-          class="w-full md:w-80 !text-red"
-          style="
-            --p-panelmenu-panel-background: var(
-              --color-neutral-semilight
-            ) !important;
-          "
-        >
+        <PanelMenu multiple :model="items" class="w-full md:w-80">
           <template #item="{ item }">
             <NuxtLink
               :to="item.route"
@@ -100,9 +91,3 @@ const items = ref<MenuItem[]>([
   },
 ]);
 </script>
-<style scoped>
-.p-panelmenu-item-content {
-  background: black !important;
-  color: white !important;
-}
-</style>
