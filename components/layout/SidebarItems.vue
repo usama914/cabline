@@ -92,19 +92,19 @@ const items = ref<MenuItem[]>([
 ]);
 </script>
 <style scoped>
-/* Using ::v-deep to apply the desired styling */
-::v-deep .p-panelmenu-panel {
+/* Using :deep(<inner-selector>) for the applying styling */
+:deep(.p-panelmenu-panel) {
   background-color: var(--color-neutral-semilight) !important;
 }
-::v-deep .p-panelmenu-item-content a {
+:deep(.p-panelmenu-item-content a) {
   padding: 5px 0px !important;
   margin-bottom: 5px;
 }
-::v-deep .p-panelmenu-item-content:hover {
+:deep(.p-panelmenu-item-content:hover) {
   background: black !important;
   color: white !important;
 }
-::v-deep .p-panelmenu-header-content:hover {
+:deep(.p-panelmenu-header-content:hover) {
   background: transparent !important;
 }
 </style>
