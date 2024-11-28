@@ -10,7 +10,7 @@
         </h1>
       </div>
       <div class="card flex justify-center">
-        <PanelMenu multiple :model="items" class="w-full md:w-80">
+        <PanelMenu multiple :model="items" class="sidebar-links w-full md:w-80">
           <template #item="{ item }">
             <NuxtLink
               :to="item.route"
@@ -91,3 +91,20 @@ const items = ref<MenuItem[]>([
   },
 ]);
 </script>
+<style scoped>
+/* Using ::v-deep to apply the desired styling */
+::v-deep .p-panelmenu-panel {
+  background-color: var(--color-neutral-semilight) !important;
+}
+::v-deep .p-panelmenu-item-content a {
+  padding: 5px 0px !important;
+  margin-bottom: 5px;
+}
+::v-deep .p-panelmenu-item-content:hover {
+  background: black !important;
+  color: white !important;
+}
+::v-deep .p-panelmenu-header-content:hover {
+  background: transparent !important;
+}
+</style>

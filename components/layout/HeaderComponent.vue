@@ -90,7 +90,6 @@
 </template>
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, watch } from "vue";
-import { useRoute } from "vue-router";
 
 interface Link {
   name: string;
@@ -98,8 +97,10 @@ interface Link {
 }
 
 const route = useRoute();
+
 const activeStyle =
   "border-top: 3px solid transparent; border-image: linear-gradient(90deg, #BB5DE9 0%, #30D5E8 100%); border-image-slice: 1;";
+  
 const links: Link[] = [
   { name: "Dispatch", path: "/dispatch" },
   { name: "Bookings", path: "/bookings" },

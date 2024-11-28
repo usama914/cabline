@@ -14,6 +14,7 @@ export default {
       fontFamily: {
         mitr: ['Mitr', 'sans-serif'], 
       },
+      
     },
   },
   plugins: [],
